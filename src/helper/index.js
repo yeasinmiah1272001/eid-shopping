@@ -9,61 +9,15 @@ export const getData = async (endpoint) => {
   return data;
 };
 
-export const getManSneaker = async () => {
-  const endPoint = "http://localhost:3000/api/allproducts";
-  const products = await getData(endPoint);
-  const product = products.allData;
-  const filterData = product.filter(
-    (item) => item.category === "Men's Sneaker"
-  );
-
-  return filterData;
+const getFilteredData = async (category) => {
+  const products = await getData("http://localhost:3000/api/allproducts");
+  return products.allData.filter((item) => item.category === category);
 };
-export const getMenPant = async () => {
-  const endPoint = "http://localhost:3000/api/allproducts";
-  const products = await getData(endPoint);
-  const product = products.allData;
-  const filterData = product.filter((item) => item.category === "Men's Pants");
 
-  return filterData;
-};
-export const getManBoot = async () => {
-  const endPoint = "http://localhost:3000/api/allproducts";
-  const products = await getData(endPoint);
-  const product = products.allData;
-  const filterData = product.filter((item) => item.category === "Men's Boot");
-
-  return filterData;
-};
-export const getManBag = async () => {
-  const endPoint = "http://localhost:3000/api/allproducts";
-  const products = await getData(endPoint);
-  const product = products.allData;
-  const filterData = product.filter((item) => item.category === "Bag");
-
-  return filterData;
-};
-export const getManCap = async () => {
-  const endPoint = "http://localhost:3000/api/allproducts";
-  const products = await getData(endPoint);
-  const product = products.allData;
-  const filterData = product.filter((item) => item.category === "Cap");
-
-  return filterData;
-};
-export const getManEarPhone = async () => {
-  const endPoint = "http://localhost:3000/api/allproducts";
-  const products = await getData(endPoint);
-  const product = products.allData;
-  const filterData = product.filter((item) => item.category === "Earphones");
-
-  return filterData;
-};
-export const getBottle = async () => {
-  const endPoint = "http://localhost:3000/api/allproducts";
-  const products = await getData(endPoint);
-  const product = products.allData;
-  const filterData = product.filter((item) => item.category === "Bottle");
-
-  return filterData;
-};
+export const getManSneaker = () => getFilteredData("Men's Sneaker");
+export const getMenPant = () => getFilteredData("Men's Pants");
+export const getManBoot = () => getFilteredData("Men's Boot");
+export const getManBag = () => getFilteredData("Bag");
+export const getManCap = () => getFilteredData("Cap");
+export const getManEarPhone = () => getFilteredData("Earphones");
+export const getBottle = () => getFilteredData("Bottle");
