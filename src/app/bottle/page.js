@@ -1,4 +1,4 @@
-"use client";
+
 import React from "react";
 import { getBottle } from "../../helper";
 import Link from "next/link";
