@@ -1,14 +1,11 @@
-
-import BagItem from "../../components/menuItem/BagItem"
+import BagItem from "../../components/menuItem/BagItem";
 
 const BagPage = () => {
- 
   return (
     <div>
-      <BagItem/>
+      <BagItem />
     </div>
-  
-  )
-}
+  );
+};
 
-export default BagPage
+export default BagPage;
