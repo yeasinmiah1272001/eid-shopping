@@ -1,4 +1,4 @@
-"use client"
+
 import { getBottle } from "../../helper";
 import Link from "next/link";
 import Image from "next/image";

@@ -1,4 +1,4 @@
-
+"use client"
 import CapItem from "../../components/menuItem/CapItem";
 
 

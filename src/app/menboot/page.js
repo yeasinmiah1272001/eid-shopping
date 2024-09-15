@@ -1,4 +1,4 @@
-
+"use client"
 import ManBoot from "../../components/menuItem/ManBoot";
 
 const ManBooot = () => {

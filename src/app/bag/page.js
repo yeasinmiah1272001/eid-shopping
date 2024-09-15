@@ -1,4 +1,4 @@
-
+"use client"
 import BagItem from "../../components/menuItem/BagItem"
 
 const BagPage = () => {
