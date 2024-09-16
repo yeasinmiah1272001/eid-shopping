@@ -20,7 +20,7 @@ const CartPage = () => {
             Product Not Available
           </h1>
           <p className="text-gray-600 mb-6">
-            The product you're looking for is no longer available or does not
+            The product youre looking for is no longer available or does not
             exist.
           </p>
 
