@@ -1,13 +1,18 @@
 "use client";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IoMdClose } from "react-icons/io";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import CartSummary from '../components/CartSummary'
+import { allRemove, decrementQuantity, incressQuantity, singleDelete } from "./redux/shoppingSlice";
+import toast from "react-hot-toast";
+
 
 const Cart = () => {
   const selector = useSelector((state) => state.name.cart);
+  const dispatch = useDispatch()
   console.log("selector", selector);
+
   return (
     <div>
       <div className="overflow-x-auto mt-10">
@@ -29,7 +34,7 @@ const Cart = () => {
             {selector.map((product) => (
               <tr key={product.id} className="text-center">
                 <td className="px-4 py-2 border border-white">
-                  <button className="text-red-500 hover:text-red-700">
+                  <button onClick={() => dispatch(singleDelete(product.id), toast.success("deleted your product success"))} className="text-red-500 hover:text-red-700">
                     <IoMdClose size={20} />
                   </button>
                 </td>
@@ -50,12 +55,12 @@ const Cart = () => {
                 </td>
                 <td className="px-4 py-2 border border-white">
                   <div className="flex items-center justify-center">
-                    <button className="px-2 py-1 text-white bg-gray-500 hover:bg-gray-700 rounded">
+                    <button onClick={() => dispatch(decrementQuantity(product.id))} className="px-2 py-1 text-white bg-gray-500 hover:bg-gray-700 rounded">
                       <FaMinus />
                     </button>
                     <span className="mx-2">{product.quantity}</span>
-                    <button className="px-2 py-1 text-white bg-blue-500 hover:bg-blue-700 rounded">
-                      <FaPlus />
+                    <button onClick={() => dispatch(incressQuantity(product.id), toast.success("increment success"))} className="px-2 py-1 text-white bg-blue-500 hover:bg-blue-700 rounded">
+                      <FaPlus  />
                     </button>
                   </div>
                 </td>
@@ -69,6 +74,7 @@ const Cart = () => {
       </div>
       <div className="  ">
         <button
+        onClick={() => dispatch(allRemove(), toast.success("all product deleted success"))}
           className={
             "bg-transparent border  border-gray-500 text-black rounded-lg px-6 py-1.5 hover:bg-red-500 hover:text-black duration-300 my-2"
           }

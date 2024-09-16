@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import toast from 'react-hot-toast'
 
 const initialState = {
   cart:[]
@@ -22,6 +23,35 @@ export const counterSlice = createSlice({
         }
     },
 
+    incressQuantity:(state, action) =>{
+      const exisistingProduct = state.cart.find((item) => item.id === action.payload);
+
+      if(exisistingProduct){
+        exisistingProduct.quantity +=1
+      }
+
+    },
+    decrementQuantity:(state, action) =>{
+      const exisistingProduct = state.cart.find((item) => item.id === action.payload);
+
+      if(exisistingProduct.quantity > 1){
+        exisistingProduct.quantity -=1;
+        toast.success("decrement your product")
+      }
+      else{
+        toast.error("can not delete less then 1 ")
+      }
+
+    },
+
+    singleDelete:(state, action)=>{
+      state.cart = state.cart.filter((item) => item.id !== action.payload)
+    },
+
+    allRemove:(state) =>{
+      state.cart = []
+    }
+
 
    
 
@@ -29,6 +59,6 @@ export const counterSlice = createSlice({
 })
 
 
-export const {  addShpping } = counterSlice.actions
+export const {  addShpping, incressQuantity, decrementQuantity, singleDelete, allRemove } = counterSlice.actions
 
 export default counterSlice.reducer
