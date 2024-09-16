@@ -10,7 +10,7 @@ const ProductItem = async() => {
 
   const endPoint = "https://shoppingapi.vercel.app/shopping";
   const products = await getData(endPoint)
-  const product = products.allData;
+  const product = products;
 
   // console.log("product", product)
 

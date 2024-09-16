@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React from 'react';
 import { IoIosStar } from 'react-icons/io';
 import { AiOutlineStock } from "react-icons/ai";
-import { FaStore } from 'react-icons/fa'; // Added import for FaStore
 
 const ProductsCard = ({ product }) => {
   return (
@@ -17,8 +16,8 @@ const ProductsCard = ({ product }) => {
           <Image
             src={product.img}
             alt={product.name}
-            width={200} // Set width
-            height={200} // Set height
+            width={200}
+            height={200}
             className="object-cover mx-auto rounded-md bg-none h-48 w-full"
           />
         </Link>
