@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 const AddToCartBtn = ({ className, product }) => {
   const dispatch = useDispatch();
   
-  // Add product to cart
+
   const handleAddToCart = () => {
     if(product){
       dispatch(addShpping(product));
