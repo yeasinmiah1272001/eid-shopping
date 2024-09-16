@@ -8,7 +8,7 @@ import ProductsCard from "./ProductsCard"
 
 const ProductItem = async() => {
 
-  const endPoint = "http://localhost:3000/api/allproducts";
+  const endPoint = "https://shoppingapi.vercel.app/shopping";
   const products = await getData(endPoint)
   const product = products.allData;
 
