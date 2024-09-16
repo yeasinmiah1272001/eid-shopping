@@ -6,6 +6,7 @@ import {  FaStore } from "react-icons/fa";
 import { AiOutlineStock } from "react-icons/ai"; 
 import { IoIosStar } from "react-icons/io";
 import { getManSneaker } from "../../helper";
+import AddToCartBtn from "../../components/AddToCartBtn";
 
 const ManSneaker = async() => {
     const sneaker = await getManSneaker()
@@ -51,11 +52,9 @@ const ManSneaker = async() => {
               <FaStore className="mr-2 text-blue-600" />
               <p className="text-sm text-gray-600">Seller: {item.seller}</p>
             </div>
-            <Link href={`/product/${item.id}`}>
-              <button className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">
-                Add To Cart
-              </button>
-            </Link>
+            <div>
+             <AddToCartBtn/>
+            </div>
           </div>
         </div>
       ))}

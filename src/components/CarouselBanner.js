@@ -18,7 +18,7 @@ const CarouselBanner = () => {
     Autoplay(),
   ]);
   return (
-    <div className="overflow-hidden cursor-pointer relative z-0" ref={emblaRef}>
+    <div className="overflow-hidden cursor-pointer relative z-50" ref={emblaRef}>
     <div className="flex">
       {bannerImages?.map((item) => (
         <Image
@@ -30,7 +30,7 @@ const CarouselBanner = () => {
         />
       ))}
     </div>
-    <div className="absolute top-0 left-0 inset-0 bg-gradient-to-b from-gray-900/10 via-gray-900/30 to-gray-300 dark:to-mainColor" />
+    {/* <div className="absolute top-0 left-0 inset-0 bg-gradient-to-b from-gray-900/10 via-gray-900/30 to-gray-300 dark:to-mainColor" /> */}
   </div>
   )
 }

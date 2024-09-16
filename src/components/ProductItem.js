@@ -21,11 +21,11 @@ const ProductItem = async() => {
 
    
   return (
-    <Container className={"mt-4"}>
+    <Container className={""}>
         <h1 className="text-xl font-semibold text-black">All Tranding Products</h1>
     
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-5">
       {
             product.map((item, index) => (
                 <ProductsCard key={index}  product={item}/>

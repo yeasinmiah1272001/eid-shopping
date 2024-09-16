@@ -8,6 +8,7 @@ import { AiOutlineStock } from "react-icons/ai";
 import { IoIosStar } from "react-icons/io";
 import { getManBag } from "../../helper";
 import Container from "../../components/Container";
+import AddToCartBtn from "../../components/AddToCartBtn";
 const BagPage = async() => {
    const product = await getManBag()
  
@@ -53,11 +54,9 @@ const BagPage = async() => {
               <FaStore className="mr-2 text-blue-600" />
               <p className="text-sm text-gray-600">Seller: {item.seller}</p>
             </div>
-            <Link href={`/product/${item.id}`}>
-              <button className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">
-                Add To Cart
-              </button>
-            </Link>
+            <div>
+             <AddToCartBtn/>
+            </div>
           </div>
         </div>
       ))}

@@ -5,9 +5,11 @@ import React from 'react';
 import { IoIosStar } from 'react-icons/io';
 import { AiOutlineStock } from "react-icons/ai";
 
+import AddToCartbtn from "..//components/AddToCartBtn"
+
 const ProductsCard = ({ product }) => {
   return (
-    <div>
+    <div className=''>
       <div
         key={product.id}
         className="bg-[#ECEEF0] w-full shadow-lg hover:shadow-black duration-500 rounded-lg p-4 hover:shadow-lg transition-shadow"
@@ -18,7 +20,7 @@ const ProductsCard = ({ product }) => {
             alt={product.name}
             width={200}
             height={200}
-            className="object-cover mx-auto rounded-md bg-none h-48 w-full"
+            className="object-cover hover:scale-110 duration-500 mx-auto rounded-md bg-none h-48 w-full"
           />
         </Link>
         <div className="mt-4">
@@ -46,9 +48,7 @@ const ProductsCard = ({ product }) => {
             <p className="text-sm text-gray-600">Seller: {product.seller}</p>
           </div>
           <Link href={`/product/${product.id}`} passHref>
-            <button className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">
-              Add To Cart
-            </button>
+          <AddToCartbtn className={"text-black"}/>
           </Link>
         </div>
       </div>
