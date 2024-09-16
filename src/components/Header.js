@@ -4,6 +4,7 @@ import Link from "next/link";
 import Container from "./Container";
 import { FaHeart, FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
 import { usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -19,6 +20,9 @@ const Header = () => {
   ];
 
   const pathname = usePathname();
+
+  const selector = useSelector((state) => state.name.cart)
+  // console.log("selector", selector)
 
   return (
     <div className="bg-white sticky top-0 z-50 p-4 shadow-md opacity-100">
@@ -52,10 +56,10 @@ const Header = () => {
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">0</span>
           </div>
 
-          <div className="relative">
+          <Link href={"/cart"} className="relative">
             <FaShoppingCart className="text-gray-700 hover:text-blue-600 text-xl cursor-pointer transition-colors duration-300" />
-            <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">0</span>
-          </div>
+            <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">{selector.length > 0 ? selector.length : "0"}</span>
+          </Link>
 
           {/* Hamburger Menu for mobile */}
           <div className="md:hidden">

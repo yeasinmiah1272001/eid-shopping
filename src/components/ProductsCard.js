@@ -8,21 +8,23 @@ import { AiOutlineStock } from "react-icons/ai";
 import AddToCartbtn from "..//components/AddToCartBtn"
 
 const ProductsCard = ({ product }) => {
+
+
   return (
     <div className=''>
       <div
         key={product.id}
         className="bg-[#ECEEF0] w-full shadow-lg hover:shadow-black duration-500 rounded-lg p-4 hover:shadow-lg transition-shadow"
       >
-        <Link href={`/product/${product.id}`} passHref>
-          <Image
-            src={product.img}
-            alt={product.name}
-            width={200}
-            height={200}
-            className="object-cover hover:scale-110 duration-500 mx-auto rounded-md bg-none h-48 w-full"
-          />
-        </Link>
+      <Link href={{ pathname: `/product/${product.id}`, query: { id: product.id } }}>
+  <Image
+    src={product.img}
+    alt={product.name}
+    width={200}
+    height={200}
+    className="object-cover hover:scale-110 duration-500 mx-auto rounded-md bg-none h-48 w-full"
+  />
+</Link>
         <div className="mt-4">
           <h2 className="text-xl font-semibold">{product.name.slice(0,10)}</h2>
           <div className="flex justify-between items-center mt-2">
@@ -47,9 +49,9 @@ const ProductsCard = ({ product }) => {
             {/* <FaStore className="mr-2 text-blue-600" /> */}
             <p className="text-sm text-gray-600">Seller: {product.seller}</p>
           </div>
-          <Link href={`/product/${product.id}`} passHref>
-          <AddToCartbtn className={"text-black"}/>
-          </Link>
+          <div>
+          <AddToCartbtn product={product} className={"text-black"}/>
+          </div>
         </div>
       </div>
     </div>
