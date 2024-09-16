@@ -1,4 +1,4 @@
-
+"use client"
 import BottleItem from "../../components/menuItem/BottleItem";
 
 

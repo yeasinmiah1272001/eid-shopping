@@ -1,4 +1,4 @@
-
+"use client"
 import EarPhoneItem from "../../components/menuItem/EarPhoneItem";
 
 const EarPhone = () => {

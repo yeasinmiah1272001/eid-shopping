@@ -1,4 +1,4 @@
-
+"use client"
 import PantItem from "../../components/menuItem/PantItem";
 const Menpants =() => {
 
