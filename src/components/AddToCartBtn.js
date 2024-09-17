@@ -7,7 +7,7 @@ import { addShpping } from "./redux/shoppingSlice"; // Verify spelling here
 import toast from "react-hot-toast";
 
 
-const AddToCartBtn = ({ className, product }) => {
+const AddToCartBtn = ({ product }) => {
   const dispatch = useDispatch();
   
 
@@ -28,8 +28,7 @@ const AddToCartBtn = ({ className, product }) => {
         <button
           onClick={handleAddToCart}
           className={twMerge(
-            "bg-transparent w-full border border-gray-500 text-black rounded-full px-6 py-1.5 hover:bg-white hover:text-black duration-300 my-2",
-            className
+            "bg-transparent w-full border border-gray-500 text-black rounded-full px-6 py-1.5 hover:bg-white hover:text-black duration-300 my-2"
           )}
         >
           Add To Cart
