@@ -1,8 +1,10 @@
+"use client"
 import Image from "next/image";
 import Container from "./Container";
 import { IoIosStar } from 'react-icons/io';
 import { AiOutlineStock } from "react-icons/ai";
 import AddToCartBtn from "./AddToCartBtn";
+import Link from "next/link";
 
 const SingleProduct = ({ findData }) => {
   return (
@@ -43,9 +45,9 @@ const SingleProduct = ({ findData }) => {
           </div>
 
           {/* Add to Cart Button */}
-          <div className="mt-4">
+          <Link href={"/cart"} className="mt-4">
             <AddToCartBtn />
-          </div>
+          </Link>
         </div>
       </div>
     </Container>

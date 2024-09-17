@@ -1,10 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Container from "./Container";
-import { FaHeart, FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
+import { FaHeart, FaShoppingCart, FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
 import { usePathname } from "next/navigation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { signIn, signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import { addUser, deleteUser } from "./redux/shoppingSlice";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -20,9 +23,25 @@ const Header = () => {
   ];
 
   const pathname = usePathname();
+  const cartItems = useSelector((state) => state.name.cart);
+  const disPatch = useDispatch()
 
-  const selector = useSelector((state) => state.name.cart)
-  // console.log("selector", selector)
+  const { data: session } = useSession();
+  console.log("session", session);
+
+  useEffect(() => {
+    if (session) {
+      disPatch(
+        addUser({
+          name: session.user?.name,
+          email: session.user?.email,
+          image: session.user?.image,
+        })
+      );
+    } else {
+      disPatch(deleteUser());
+    }
+  }, [session, disPatch]);
 
   return (
     <div className="bg-white sticky top-0 z-50 p-4 shadow-md opacity-100">
@@ -49,8 +68,8 @@ const Header = () => {
           ))}
         </div>
 
-        {/* Favorite and Cart Icons */}
-        <div className="flex gap-8">
+        {/* Favorite, Cart, User/Login Icons */}
+        <div className="flex gap-8 items-center">
           <div className="relative">
             <FaHeart className="text-gray-700 hover:text-red-600 text-xl cursor-pointer transition-colors duration-300" />
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">0</span>
@@ -58,8 +77,39 @@ const Header = () => {
 
           <Link href={"/cart"} className="relative">
             <FaShoppingCart className="text-gray-700 hover:text-blue-600 text-xl cursor-pointer transition-colors duration-300" />
-            <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">{selector.length > 0 ? selector.length : "0"}</span>
+            <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+              {cartItems.length > 0 ? cartItems.length : "0"}
+            </span>
           </Link>
+
+          {/* Login/User section */}
+          {session?.user ? (
+            <div className="relative flex items-center gap-4">
+              <div className="flex items-center gap-2 cursor-pointer">
+                <Image
+                  src={session.user.image}
+                  alt="User"
+                  height={30}
+                  width={30}
+                  className="w-8 h-8 rounded-full"
+                />
+                {/* <p className="text-gray-700">{session.user.name}</p> */}
+              </div>
+              <button
+                onClick={() => signOut()}
+                className="text-sm text-white bg-red-500 px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-300"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <p
+              onClick={() => signIn()}
+              className="text-gray-700 hover:text-blue-600 text-xl cursor-pointer transition-colors duration-300"
+            >
+              <FaUserCircle />
+            </p>
+          )}
 
           {/* Hamburger Menu for mobile */}
           <div className="md:hidden">

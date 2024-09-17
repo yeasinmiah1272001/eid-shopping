@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import toast from 'react-hot-toast'
 
 const initialState = {
-  cart:[]
+  cart:[],
+  userInfo:null
 }
 
 export const counterSlice = createSlice({
@@ -50,7 +51,14 @@ export const counterSlice = createSlice({
 
     allRemove:(state) =>{
       state.cart = []
-    }
+    },
+
+    addUser:(state, action)=>{
+      state.userInfo = action.payload
+    },
+    deleteUser: (state) => {
+      state.userInfo = null;
+    },
 
 
    
@@ -59,6 +67,6 @@ export const counterSlice = createSlice({
 })
 
 
-export const {  addShpping, incressQuantity, decrementQuantity, singleDelete, allRemove } = counterSlice.actions
+export const {  addShpping, incressQuantity, decrementQuantity, singleDelete, allRemove, addUser, deleteUser } = counterSlice.actions
 
 export default counterSlice.reducer
