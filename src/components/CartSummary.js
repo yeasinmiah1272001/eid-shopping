@@ -1,6 +1,7 @@
+"use client"
 
-
-const CartSummary = () => {
+const CartSummary = ({product}) => {
+  console.log("product", product)
   return (
     <div>
     <h2 className="text-2xl font-medium text-gray-900 mt-3">

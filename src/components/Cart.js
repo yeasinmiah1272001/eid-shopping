@@ -3,15 +3,69 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { IoMdClose } from "react-icons/io";
 import { FaPlus, FaMinus } from "react-icons/fa";
-import CartSummary from '../components/CartSummary'
-import { allRemove, decrementQuantity, incressQuantity, singleDelete } from "./redux/shoppingSlice";
+import { allRemove, decrementQuantity, incressQuantity, resetOrder, singleDelete } from "./redux/shoppingSlice";
 import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { loadStripe } from "@stripe/stripe-js";
 
 
 const Cart = () => {
   const selector = useSelector((state) => state.name.cart);
-  const dispatch = useDispatch()
-  console.log("selector", selector);
+  const { data: session } = useSession();
+  const dispatch = useDispatch();
+
+  // State to manage totals
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalDiscount, setTotalDiscount] = useState(0);
+  const [payableTotal, setPayableTotal] = useState(0);
+  useEffect(() => {
+    let priceSum = 0;
+    let discountSum = 0;
+
+    selector.map((product) => {
+      const subtotal = product.price * product.quantity;
+      const discount = (product.oldprice - product.price) * product.quantity;
+      
+      priceSum += subtotal;
+      discountSum += discount;
+    });
+
+    setTotalPrice(priceSum);
+    setTotalDiscount(discountSum);
+    setPayableTotal(priceSum - discountSum);
+  }, [selector]);
+
+
+  // payment
+  const stripePromise = loadStripe(
+    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+  );
+  const handleCheakOut = async () =>{
+    const stripe = await stripePromise;
+    const response = await fetch("http://localhost:3000/api/checkout", {
+      method:"POST",
+      headers:{
+        "Content-type" : "application/json"
+      },
+      body:JSON.stringify({
+        item:selector,
+        email:session.user.email,
+      })
+    })
+   const data = await response.json();
+   if(response.ok){
+    stripe?.redirectToCheckout({sessionId:data.id});
+    dispatch(resetOrder())
+
+   }
+   else{
+    throw new Error("Failed to create Stripe Payment");
+   }
+  }
+
+
+
 
   return (
     <div>
@@ -25,6 +79,8 @@ const Cart = () => {
               <th className="px-4 py-2 border">Remove</th>
               <th className="px-4 py-2 border">Image</th>
               <th className="px-4 py-2 border">Title</th>
+              <th className="px-4 py-2 border">Old Price</th>
+              <th className="px-4 py-2 border">Discount</th>
               <th className="px-4 py-2 border">Unit Price</th>
               <th className="px-4 py-2 border">Quantity</th>
               <th className="px-4 py-2 border">Subtotal</th>
@@ -34,7 +90,7 @@ const Cart = () => {
             {selector.map((product) => (
               <tr key={product.id} className="text-center">
                 <td className="px-4 py-2 border border-white">
-                  <button onClick={() => dispatch(singleDelete(product.id), toast.success("deleted your product success"))} className="text-red-500 hover:text-red-700">
+                  <button onClick={() => dispatch(singleDelete(product.id), toast.success("Product deleted successfully"))} className="text-red-500 hover:text-red-700">
                     <IoMdClose size={20} />
                   </button>
                 </td>
@@ -51,6 +107,12 @@ const Cart = () => {
                   {product.name.slice(0, 10)}
                 </td>
                 <td className="px-4 py-2 border border-white">
+                  ${product.oldprice.toFixed(2)}
+                </td>
+                <td className="px-4 py-2 border border-white">
+                  ${(product.oldprice - product.price).toFixed(2)}
+                </td>
+                <td className="px-4 py-2 border border-white">
                   ${product.price.toFixed(2)}
                 </td>
                 <td className="px-4 py-2 border border-white">
@@ -59,8 +121,8 @@ const Cart = () => {
                       <FaMinus />
                     </button>
                     <span className="mx-2">{product.quantity}</span>
-                    <button onClick={() => dispatch(incressQuantity(product.id), toast.success("increment success"))} className="px-2 py-1 text-white bg-blue-500 hover:bg-blue-700 rounded">
-                      <FaPlus  />
+                    <button onClick={() => dispatch(incressQuantity(product.id), toast.success("Increment successful"))} className="px-2 py-1 text-white bg-blue-500 hover:bg-blue-700 rounded">
+                      <FaPlus />
                     </button>
                   </div>
                 </td>
@@ -72,19 +134,48 @@ const Cart = () => {
           </tbody>
         </table>
       </div>
-      <div className="  ">
+
+      <div className="w-full">
         <button
-        onClick={() => dispatch(allRemove(), toast.success("all product deleted success"))}
-          className={
-            "bg-transparent border  border-gray-500 text-black rounded-lg px-6 py-1.5 hover:bg-red-500 hover:text-black duration-300 my-2"
-          }
+          onClick={() => dispatch(allRemove(), toast.success("All products deleted successfully"))}
+          className="bg-transparent border w-full border-gray-500 text-black rounded-lg px-6 py-1.5 hover:bg-red-500 hover:text-black duration-300 my-2"
         >
-          All Delete
+          Delete All
         </button>
       </div>
-      <div>
-        <CartSummary/>
 
+      <div className="px-24">
+        <h2 className="text-2xl font-medium text-gray-900 mt-3">
+          Order Summary
+        </h2>
+        <div className="mt-6 space-y-4">
+          <div className="flex items-center justify-between">
+            <p className="text-xl text-gray-600">Total Price</p>
+            <p className="text-xl font-medium text-gray-900">
+              ${totalPrice.toFixed(2)}
+            </p>
+          </div>
+
+          <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+            <p className="text-base font-medium text-gray-900">Total Discount</p>
+            <p className="font-medium text-gray-900 text-xl">
+              ${totalDiscount.toFixed(2)}
+            </p>
+          </div>
+
+          <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+            <p className="text-base font-medium text-gray-900">Payable Total</p>
+            <p className="text-2xl font-medium text-black">
+              ${payableTotal.toFixed(2)}
+            </p>
+          </div>
+
+          <div className="w-full h-24">
+            <button onClick={handleCheakOut} className="bg-transparent border w-full border-gray-500 text-black rounded-lg px-6 py-1.5 hover:bg-red-500 hover:text-black duration-300 my-2">
+              Proceed to Payment
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

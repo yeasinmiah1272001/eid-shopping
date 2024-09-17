@@ -1,4 +1,4 @@
-"use client"
+// "use client"
 
 import { getData } from "../../../helper";
 import SingleProduct from "../../../components/SingleProduct"

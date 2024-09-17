@@ -8,7 +8,7 @@ import ProductsCard from "./ProductsCard"
 
 const ProductItem = async() => {
 
-  const endPoint = "https://shoppingapi.vercel.app/shopping";
+  const endPoint = "https://shoppingapi.vercel.app/products";
   const products = await getData(endPoint)
   const product = products;
 
@@ -27,7 +27,7 @@ const ProductItem = async() => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-5">
       {
-            product.map((item, index) => (
+            product.slice(0,20).map((item, index) => (
                 <ProductsCard key={index}  product={item}/>
             ))
         }

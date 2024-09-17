@@ -3,6 +3,7 @@ import toast from 'react-hot-toast'
 
 const initialState = {
   cart:[],
+  orderShopping:[],
   userInfo:null
 }
 
@@ -61,12 +62,30 @@ export const counterSlice = createSlice({
     },
 
 
+    addOrder: (state, action) => {
+      const existingOrder = state.orderShopping.find(
+        (item) => item.id === action.payload.id
+      );
+      if (existingOrder) {
+        state.orderShopping.push(action.payload);
+      } else {
+        state.orderShopping = action.payload;
+      }
+    },
+
+    resetOrder: (state) => {
+      state.orderShopping = [];
+    },
+
+
+
+
    
 
   },
 })
 
 
-export const {  addShpping, incressQuantity, decrementQuantity, singleDelete, allRemove, addUser, deleteUser } = counterSlice.actions
+export const {  addShpping, incressQuantity, decrementQuantity, singleDelete, allRemove, addUser, deleteUser, addOrder, resetOrder } = counterSlice.actions
 
 export default counterSlice.reducer
