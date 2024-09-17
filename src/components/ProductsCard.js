@@ -1,6 +1,6 @@
 
-import { IoIosStar } from 'react-icons/io'; // Import star icons for ratings
-import { AiOutlineStock } from 'react-icons/ai'; // Stock icon for availability
+import { IoIosStar } from 'react-icons/io'; 
+import { AiOutlineStock } from 'react-icons/ai';
 import Image from 'next/image';
 import Link from 'next/link';
 
