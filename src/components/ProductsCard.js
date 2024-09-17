@@ -3,8 +3,9 @@ import { IoIosStar } from 'react-icons/io'; // Import star icons for ratings
 import { AiOutlineStock } from 'react-icons/ai'; // Stock icon for availability
 import Image from 'next/image';
 import Link from 'next/link';
-import AddToCartbtn from './AddToCartbtn'; // Your AddToCart button component
+
 import { FaHeart } from 'react-icons/fa';
+import AddToCartBtn from './AddToCartBtn';
 
 const ProductCard = ({ product}) => {
   return (
@@ -54,7 +55,7 @@ const ProductCard = ({ product}) => {
         </div>
 
         <div>
-          <AddToCartbtn product={product} className={"text-black"} />
+          <AddToCartBtn product={product} className={"text-black"} />
         </div>
       </div>
     </div>
