@@ -46,7 +46,6 @@ const Header = () => {
   return (
     <div className="bg-white sticky top-0 z-50 p-4 shadow-md opacity-100">
       <Container className="flex justify-between items-center">
-        {/* Logo */}
         <div>
           <h1 className="text-xl font-bold">Logo</h1>
         </div>
