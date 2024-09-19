@@ -44,7 +44,7 @@ const Header = () => {
   }, [session, disPatch]);
 
   return (
-    <div className="bg-white sticky top-0 z-50 p-4 shadow-md opacity-100">
+    <div className="bg-white sticky top-0 z-50   shadow-md opacity-100">
       <Container className="flex justify-between items-center">
         <div>
           <h1 className="text-xl font-bold">Logo</h1>
@@ -129,7 +129,7 @@ const Header = () => {
 
       {/* Mobile menu - Toggle visibility */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white p-4 shadow-md">
+        <div className="md:hidden bg-white shadow-md">
           {navbar.map((item, index) => (
             <Link
               key={index}
