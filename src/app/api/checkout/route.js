@@ -12,7 +12,7 @@ export const POST = async (request) => {
       quantity: item.quantity,
       price_data: {
         currency: "usd",
-        unit_amount: item.price * 100,
+        unit_amount: Math.round(item.price * 100),
         product_data: {
           name: item.name,
           description: item.description,

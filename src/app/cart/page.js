@@ -7,6 +7,7 @@ import Link from "next/link";
 
 const CartPage = () => {
   const selector = useSelector((state) => state.name.cart);
+
   return (
     <Container>
       {selector.length ? (

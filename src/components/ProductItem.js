@@ -8,10 +8,6 @@ const ProductItem = async () => {
   const products = await getData(endPoint);
   const product = products;
 
-  // console.log("product", product)
-
-  const filterData = product.filter((item) => item.category === "Earphones");
-
   return (
     <Container className={""}>
       <h1 className="text-xl font-semibold text-black">

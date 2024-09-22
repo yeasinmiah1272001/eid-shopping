@@ -2,7 +2,14 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Container from "./Container";
-import { FaHeart, FaShoppingCart, FaBars, FaTimes, FaUserCircle, FaShopware } from "react-icons/fa";
+import {
+  FaHeart,
+  FaShoppingCart,
+  FaBars,
+  FaTimes,
+  FaUserCircle,
+  FaShopware,
+} from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -13,6 +20,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navbar = [
     { title: "Home", href: "/" },
+    { title: "All Products", href: "/allProducts" },
     { title: "Mens Sneaker", href: "/mansneaker" },
     { title: "Mens Pants", href: "/pants" },
     { title: "Mens Boot", href: "/menboot" },
@@ -24,10 +32,10 @@ const Header = () => {
 
   const pathname = usePathname();
   const cartItems = useSelector((state) => state.name.cart);
-  const disPatch = useDispatch()
+  const disPatch = useDispatch();
 
   const { data: session } = useSession();
-  console.log("session", session);
+  // console.log("session", session);
 
   useEffect(() => {
     if (session) {
@@ -44,12 +52,10 @@ const Header = () => {
   }, [session, disPatch]);
 
   return (
-    <div className="bg-white sticky top-0 z-50   shadow-md opacity-100">
+    <div className="">
       <Container className="flex justify-between items-center">
         <div>
-        <FaShopware className="text-3xl text-blue-600" />
-
-
+          <FaShopware className="text-3xl text-blue-600" />
         </div>
 
         {/* Navbar links - Hidden on small screens */}
@@ -73,7 +79,9 @@ const Header = () => {
         <div className="flex gap-8 items-center">
           <div className="relative">
             <FaHeart className="text-gray-700 hover:text-red-600 text-xl cursor-pointer transition-colors duration-300" />
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">0</span>
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+              0
+            </span>
           </div>
 
           <Link href={"/cart"} className="relative">
