@@ -1,39 +1,30 @@
-
-
 import { getData } from "../helper";
-import Container from "./Container"
+import Container from "./Container";
 
-import ProductsCard from "./ProductsCard"
+import ProductsCard from "./ProductsCard";
 
-
-const ProductItem = async() => {
-
+const ProductItem = async () => {
   const endPoint = "https://shoppingapi.vercel.app/products";
-  const products = await getData(endPoint)
+  const products = await getData(endPoint);
   const product = products;
 
   // console.log("product", product)
 
-  const filterData = product.filter((item) => item.category === "Earphones" )
+  const filterData = product.filter((item) => item.category === "Earphones");
 
-  console.log("filterdata", filterData)
-
-
-   
   return (
     <Container className={""}>
-        <h1 className="text-xl font-semibold text-black">All Tranding Products</h1>
-    
+      <h1 className="text-xl font-semibold text-black">
+        All Tranding Products
+      </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-5">
-      {
-            product.slice(0,20).map((item, index) => (
-                <ProductsCard key={index}  product={item}/>
-            ))
-        }
+        {product.slice(0, 20).map((item, index) => (
+          <ProductsCard key={index} product={item} />
+        ))}
       </div>
     </Container>
-  ) 
-}
+  );
+};
 
-export default ProductItem
+export default ProductItem;
