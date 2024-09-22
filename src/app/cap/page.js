@@ -1,5 +1,3 @@
-"use client";
-
 import { getManCap } from "../../helper";
 import Container from "../../components/Container";
 import ProductsCard from "../../components/ProductsCard";

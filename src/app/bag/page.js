@@ -1,5 +1,3 @@
-"use client";
-
 import { getManBag } from "../../helper";
 import Container from "../../components/Container";
 import ProductsCard from "../../components/ProductsCard";

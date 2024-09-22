@@ -1,4 +1,3 @@
-"use client";
 import Container from "../../components/Container";
 import { getMenPant } from "../../helper";
 import ProductsCard from "../../components/ProductsCard";
