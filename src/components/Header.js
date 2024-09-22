@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Container from "./Container";
-import { FaHeart, FaShoppingCart, FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
+import { FaHeart, FaShoppingCart, FaBars, FaTimes, FaUserCircle, FaShopware } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -47,7 +47,9 @@ const Header = () => {
     <div className="bg-white sticky top-0 z-50   shadow-md opacity-100">
       <Container className="flex justify-between items-center">
         <div>
-          <h1 className="text-xl font-bold">Logo</h1>
+        <FaShopware className="text-3xl text-blue-600" />
+
+
         </div>
 
         {/* Navbar links - Hidden on small screens */}

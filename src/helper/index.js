@@ -10,7 +10,7 @@ export const getData = async (endpoint) => {
 };
 
 export const getManSneaker = async () => {
-  const endPoint = "https://shoppingapi.vercel.app/products";
+  const endPoint = " http://localhost:3000/products";
   const products = await getData(endPoint);
   const product = products
   const filterData = product.filter(
@@ -20,7 +20,7 @@ export const getManSneaker = async () => {
   return filterData;
 };
 export const getMenPant = async () => {
-  const endPoint = "https://shoppingapi.vercel.app/products";
+  const endPoint = " http://localhost:3000/products";
   const products = await getData(endPoint);
   const product = products;
   const filterData = product.filter((item) => item.category === "Men's Pants");
