@@ -6,7 +6,6 @@ const AllProducts = () => {
       <div className="">
         <SideNav />
       </div>
-      {/* <div>all products</div> */}
     </div>
   );
 };
