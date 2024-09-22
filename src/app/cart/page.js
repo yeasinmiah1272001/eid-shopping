@@ -4,20 +4,14 @@ import { useSelector } from "react-redux";
 import Cart from "../../components/Cart";
 import Container from "../../components/Container";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
 
-const CartPage = async () => {
+const CartPage = () => {
   const selector = useSelector((state) => state.name.cart);
-  const session = await getServerSession();
-  if (!session?.user) {
-    redirect("/");
-  }
 
   return (
     <Container>
       {selector.length ? (
         <div>
-          {" "}
           <Cart />
         </div>
       ) : (
