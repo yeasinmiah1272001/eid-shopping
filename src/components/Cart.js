@@ -47,19 +47,16 @@ const Cart = () => {
   );
   const handleCheakOut = async () => {
     const stripe = await stripePromise;
-    const response = await fetch(
-      " https://eid-shopping.vercel.app/api/checkout",
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          item: selector,
-          email: session.user.email,
-        }),
-      }
-    );
+    const response = await fetch("/api/checkout", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        item: selector,
+        email: session.user.email,
+      }),
+    });
     const data = await response.json();
     if (response.ok) {
       stripe?.redirectToCheckout({ sessionId: data.id });
