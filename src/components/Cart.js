@@ -12,11 +12,12 @@ import {
 } from "./redux/shoppingSlice";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { loadStripe } from "@stripe/stripe-js";
 
 const Cart = () => {
   const selector = useSelector((state) => state.name.cart);
+  const userInfo = useSelector((state) => state.name.userInfo);
   const { data: session } = useSession();
   const dispatch = useDispatch();
 
@@ -195,13 +196,22 @@ const Cart = () => {
             </p>
           </div>
 
-          <div className="w-full h-24">
-            <button
-              onClick={handleCheakOut}
-              className="bg-transparent border w-full border-gray-500 text-black rounded-lg px-6 py-1.5 hover:bg-red-500 hover:text-black duration-300 my-2"
-            >
-              Proceed to Payment
-            </button>
+          <div className="mt-6 flex justify-center">
+            {userInfo ? (
+              <button
+                onClick={handleCheakOut}
+                className="w-full max-w-xs px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 shadow-md"
+              >
+                Proceed to Payment
+              </button>
+            ) : (
+              <button
+                onClick={() => signIn()}
+                className="w-full max-w-xs animate-bounce px-6 py-3 bg-red-500 text-white rounded-md hover:bg-blue-600 transition duration-300 shadow-md"
+              >
+                Please Login
+              </button>
+            )}
           </div>
         </div>
       </div>
