@@ -1,3 +1,4 @@
+"use client";
 import { FaCheckCircle } from "react-icons/fa";
 import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
