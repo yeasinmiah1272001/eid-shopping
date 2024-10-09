@@ -1,21 +1,18 @@
-"use client"
+"use client";
 
-import { Provider } from "react-redux"
-import { store } from './redux/store'
-import { SessionProvider } from "next-auth/react"
+import { Provider } from "react-redux";
+import { persistor, store } from "./redux/store";
+import { SessionProvider } from "next-auth/react";
+import { PersistGate } from "redux-persist/integration/react";
 
-const LayOut = ({children}) => {
+const LayOut = ({ children }) => {
   return (
-
     <SessionProvider>
-      <Provider store={store}>
-        {children}
-    </Provider>
+      <PersistGate loading={null} persistor={persistor}>
+        <Provider store={store}>{children}</Provider>
+      </PersistGate>
     </SessionProvider>
+  );
+};
 
-  
-   
-  )
-}
-
-export default LayOut
+export default LayOut;

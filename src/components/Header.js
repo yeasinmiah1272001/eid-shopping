@@ -54,9 +54,9 @@ const Header = () => {
   return (
     <div className="">
       <Container className="flex justify-between items-center">
-        <div>
+        <Link href={"/"}>
           <FaShopware className="text-3xl text-blue-600" />
-        </div>
+        </Link>
 
         {/* Navbar links - Hidden on small screens */}
         <div className="hidden md:flex gap-7">

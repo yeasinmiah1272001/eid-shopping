@@ -7,7 +7,6 @@ import {
   allRemove,
   decrementQuantity,
   incressQuantity,
-  resetOrder,
   singleDelete,
 } from "./redux/shoppingSlice";
 import toast from "react-hot-toast";
@@ -61,7 +60,6 @@ const Cart = () => {
     const data = await response.json();
     if (response.ok) {
       stripe?.redirectToCheckout({ sessionId: data.id });
-      dispatch(resetOrder());
     } else {
       throw new Error("Failed to create Stripe Payment");
     }
