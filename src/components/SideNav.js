@@ -58,19 +58,19 @@ const SideNav = () => {
           onClick={() => handleCategoryClick("Men's Sneaker")}
           className="text-black hover:underline cursor-pointer"
         >
-          Men's Sneaker
+          Mens Sneaker
         </p>
         <p
           onClick={() => handleCategoryClick("Men's Pants")}
           className="text-black hover:underline cursor-pointer"
         >
-          Men's Pants
+          Mens Pants
         </p>
         <p
           onClick={() => handleCategoryClick("Men's Boot")}
           className="text-black hover:underline cursor-pointer"
         >
-          Men's Boot
+          Mens Boot
         </p>
         <p
           onClick={() => handleCategoryClick("Bag")}
